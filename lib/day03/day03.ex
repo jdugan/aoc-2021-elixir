@@ -25,23 +25,25 @@ defmodule Day03 do
   # Private Methods
   # -------------------------------------------------------
 
-  defp findCarbonRate() do
-    findItemByCountOccurrences(data(), 0, :down)
-    |> convertBinaryArrayToDecimal
-  end
-
+  # power
   defp findEpsilonRate() do
     maxValue() - findGammaRate()
   end
 
   defp findGammaRate() do
     countOccurrences(data(), 0, initialCounts())
-    |> convertCountsToBinaryArray(:up)
+    |> convertCountsToBinaryArray(:higher)
+    |> convertBinaryArrayToDecimal
+  end
+
+  # life support
+  defp findCarbonRate() do
+    findItemByCountOccurrences(data(), 0, :lower)
     |> convertBinaryArrayToDecimal
   end
 
   defp findOxygenRate() do
-    findItemByCountOccurrences(data(), 0, :up)
+    findItemByCountOccurrences(data(), 0, :higher)
     |> convertBinaryArrayToDecimal
   end
 
@@ -67,15 +69,15 @@ defmodule Day03 do
   end
 
   defp convertCountToFrequencyDigit({ c0, c1 }, mode) when c0 > c1 do
-    if (mode == :up), do: 0, else: 1
+    if (mode == :higher), do: 0, else: 1
   end
 
   defp convertCountToFrequencyDigit({ c0, c1 }, mode) when c0 < c1 do
-    if (mode == :up), do: 1, else: 0
+    if (mode == :higher), do: 1, else: 0
   end
 
   defp convertCountToFrequencyDigit({ c0, c1 }, mode) when c0 == c1 do
-    if (mode == :up), do: 1, else: 0
+    if (mode == :higher), do: 1, else: 0
   end
 
 
@@ -127,28 +129,23 @@ defmodule Day03 do
     Reader.to_lines("./data/day03/input.txt")
     |> Enum.map(fn line ->
       String.graphemes(line)
-      |> Enum.map(fn s -> String.to_integer(s) end)
+      |> Enum.map(&String.to_integer/1)
     end)
   end
 
 
   # ========== UTILITY HELPERS ============================
 
-  defp digitRange do
-    0..digitsPerValue() - 1
-  end
-
-  defp digitsPerValue do
+  defp digitsPerLineItem do
     List.first(data()) |> length
   end
 
   defp initialCounts do
-    digitRange()
-    |> Enum.map(fn (_) -> { 0, 0 } end)
+    List.duplicate({ 0, 0 }, digitsPerLineItem())
   end
 
   defp maxValue do
-    max = :math.pow(2, digitsPerValue()) |> trunc
+    max = :math.pow(2, digitsPerLineItem()) |> trunc
     max - 1
   end
 

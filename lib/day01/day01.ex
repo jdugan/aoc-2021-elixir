@@ -50,11 +50,14 @@ defmodule Day01 do
   end
 
   defp countIncreases(list, i0, i1, count) do
-    if Enum.at(list, i1) > Enum.at(list, i0) do
-      countIncreases(list, i0 + 1, i1 + 1, count + 1)
-    else
-      countIncreases(list, i0 + 1, i1 + 1, count)
-    end
+    new_count = 
+      if Enum.at(list, i1) > Enum.at(list, i0) do
+        count + 1
+      else
+        count
+      end
+
+    countIncreases(list, i0 + 1, i1 + 1, new_count)
   end
 
 
