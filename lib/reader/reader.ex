@@ -1,8 +1,12 @@
 defmodule Reader do
-  # ========== PUBLIC FNS ==================================
+
+  # -------------------------------------------------------
+  # Public Methods
+  # -------------------------------------------------------
 
   def to_lines(path) do
     {_, raw} = File.read(path)
     raw |> String.split("\n", trim: true)
   end
+
 end
