@@ -1,5 +1,5 @@
 defmodule Day03 do
-
+  
   # -------------------------------------------------------
   # Public Methods
   # -------------------------------------------------------
@@ -31,7 +31,7 @@ defmodule Day03 do
   end
 
   defp findGammaRate() do
-    countOccurrences(data(), 0, initialCounts())
+    countOccurrences(data(), initialCounts())
     |> convertCountsToBinaryArray(:higher)
     |> convertBinaryArrayToDecimal
   end
@@ -83,27 +83,21 @@ defmodule Day03 do
 
   # ========== COUNT HELPERS ==============================
 
-  defp applyDigitsToCounts(digits, index, counts) when index == length(digits) do
-    counts
+  defp applyDigitsToCounts(digits, counts) do
+    digits
+    |> Enum.with_index
+    |> Enum.reduce(counts, fn ({ digit, index }, acc) ->
+      { c0, c1 } = Enum.at(acc, index)
+      changeset  = if digit == 0, do: { c0 + 1, c1 }, else: { c0, c1 + 1 }
+
+      List.update_at(acc, index, fn _ -> changeset end)
+    end)
   end
 
-  defp applyDigitsToCounts(digits, index, counts) do
-    { c0, c1 } = Enum.at(counts, index)
-    digit      = Enum.at(digits, index)
-    changeset  = if digit == 0, do: { c0 + 1, c1 }, else: { c0, c1 + 1 }
-    new_counts = List.update_at(counts, index, fn _ -> changeset end)
-
-    applyDigitsToCounts(digits, index + 1, new_counts)
-  end
-
-  defp countOccurrences(list, index, counts) when index == length(list) do
-    counts
-  end
-
-  defp countOccurrences(list, index, counts) do
-    digits = Enum.at(list, index)
-    counts = applyDigitsToCounts(digits, 0, counts)
-    countOccurrences(list, index + 1, counts)
+  defp countOccurrences(list, counts) do
+    Enum.reduce(list, counts, fn (digits, acc) ->
+       applyDigitsToCounts(digits, acc)
+    end)
   end
 
   defp findItemByCountOccurrences(list, _, _) when length(list) == 1 do
@@ -111,7 +105,7 @@ defmodule Day03 do
   end
 
   defp findItemByCountOccurrences(list, index, mode) do
-    freqs  = countOccurrences(list, 0, initialCounts())
+    freqs  = countOccurrences(list, initialCounts())
              |> convertCountsToBinaryArray(mode)
     filter = Enum.at(freqs, index)
 
@@ -148,5 +142,10 @@ defmodule Day03 do
     max = :math.pow(2, digitsPerLineItem()) |> trunc
     max - 1
   end
+
+
+  # ========== DEPRECATED =================================
+
+
 
 end

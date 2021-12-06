@@ -67,8 +67,8 @@ defmodule Day05 do
         Map.put(acc, p, count)
       end)
 
-    Enum.filter(count_map, fn {_, v} -> v > 1 end)
-    |> length
+    :maps.filter(fn _, v -> v > 1 end, count_map)
+    |> map_size
   end
 
 end
