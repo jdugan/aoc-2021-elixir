@@ -43,30 +43,26 @@ defmodule Day04 do
   # ========== DATA HELPERS ===============================
 
   defp data do
-    lines   = Reader.to_lines("./data/day04/input.txt")
-    boards  = parseBoardLines(Enum.drop(lines, 1), 0, [], [])
-    numbers = parseNumberLine(Enum.at(lines, 0))
+    lines          = Reader.to_lines("./data/day04/input.txt")
+    { boards, _ }  = parseBoardLines(Enum.drop(lines, 1))
+    numbers        = parseNumberLine(Enum.at(lines, 0))
 
     { boards, numbers }
   end
 
-  def parseBoardLines(lines, index, boards, _) when index == length(lines) do
-    boards
-  end
+  def parseBoardLines(lines) do
+    lines
+    |> Enum.with_index
+    |> Enum.reduce({ [], [] }, fn { line, index }, { boards, squares } ->
+      line_squares = parseBoardLine(line)
+      new_squares  = Enum.concat(squares, line_squares)
 
-  def parseBoardLines(lines, index, boards, squares) when rem(index, 5) == 4 do
-    line_squares = parseBoardLine(Enum.at(lines, index))
-    line_board   = Enum.concat(squares, line_squares)
-    new_boards   = [ line_board | boards ]
-
-    parseBoardLines(lines, index + 1, new_boards, [])
-  end
-
-  def parseBoardLines(lines, index, boards, squares) do
-    line_squares = parseBoardLine(Enum.at(lines, index))
-    new_squares  = Enum.concat(squares, line_squares)
-
-    parseBoardLines(lines, index + 1, boards, new_squares)
+      if rem(index, 5) == 4 do
+        { [ new_squares | boards ], [] }
+      else
+        { boards, new_squares }
+      end
+    end)
   end
 
   def parseBoardLine(line) do
