@@ -29,11 +29,11 @@ defmodule Day01 do
   end
 
   def puzzle1 do
-    countIncreasesByWindowSize(1)
+    count_increases_by_window_size(1)
   end
 
   def puzzle2 do
-    countIncreasesByWindowSize(3)
+    count_increases_by_window_size(3)
   end
 
 
@@ -41,23 +41,23 @@ defmodule Day01 do
   # Private Methods
   # -------------------------------------------------------
 
-  defp countIncreasesByWindowSize(window) do
-    countIncreases(data(), 0, window, 0)
+  defp count_increases_by_window_size(window) do
+    count_increases(data(), 0, window, 0)
   end
 
-  defp countIncreases(list, _, i1, count) when i1 == length(list) do
+  defp count_increases(list, _, i1, count) when i1 == length(list) do
     count
   end
 
-  defp countIncreases(list, i0, i1, count) do
-    new_count = 
+  defp count_increases(list, i0, i1, count) do
+    new_count =
       if Enum.at(list, i1) > Enum.at(list, i0) do
         count + 1
       else
         count
       end
 
-    countIncreases(list, i0 + 1, i1 + 1, new_count)
+    count_increases(list, i0 + 1, i1 + 1, new_count)
   end
 
 

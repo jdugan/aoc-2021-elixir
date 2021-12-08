@@ -1,5 +1,5 @@
 defmodule Day03 do
-  
+
   # -------------------------------------------------------
   # Public Methods
   # -------------------------------------------------------
@@ -13,11 +13,11 @@ defmodule Day03 do
   end
 
   def puzzle1 do
-    findGammaRate() * findEpsilonRate()
+    find_gamma_rate() * find_epsilon_rate()
   end
 
   def puzzle2 do
-    findOxygenRate() * findCarbonRate()
+    find_oxygen_rate() * find_carbon_rate()
   end
 
 
@@ -26,31 +26,31 @@ defmodule Day03 do
   # -------------------------------------------------------
 
   # power
-  defp findEpsilonRate() do
-    maxValue() - findGammaRate()
+  defp find_epsilon_rate() do
+    max_value() - find_gamma_rate()
   end
 
-  defp findGammaRate() do
-    countOccurrences(data(), initialCounts())
-    |> convertCountsToBinaryArray(:higher)
-    |> convertBinaryArrayToDecimal
+  defp find_gamma_rate() do
+    count_occurrences(data(), initial_counts())
+    |> convert_counts_to_binary_array(:higher)
+    |> convert_binary_array_to_decimal
   end
 
   # life support
-  defp findCarbonRate() do
-    findItemByCountOccurrences(data(), 0, :lower)
-    |> convertBinaryArrayToDecimal
+  defp find_carbon_rate() do
+    find_item_by_count_occurrences(data(), 0, :lower)
+    |> convert_binary_array_to_decimal
   end
 
-  defp findOxygenRate() do
-    findItemByCountOccurrences(data(), 0, :higher)
-    |> convertBinaryArrayToDecimal
+  defp find_oxygen_rate() do
+    find_item_by_count_occurrences(data(), 0, :higher)
+    |> convert_binary_array_to_decimal
   end
 
 
   # ========== CONVERSION HELPERS =========================
 
-  defp convertBinaryArrayToDecimal(digits) do
+  defp convert_binary_array_to_decimal(digits) do
     Enum.reverse(digits)
     |> Enum.with_index
     |> Enum.reduce(0, fn({n, i}, acc) ->
@@ -62,28 +62,28 @@ defmodule Day03 do
     end)
   end
 
-  defp convertCountsToBinaryArray(counts, mode) do
+  defp convert_counts_to_binary_array(counts, mode) do
     Enum.map(counts, fn(count) ->
-      convertCountToFrequencyDigit(count, mode)
+      convert_count_to_frequency_digit(count, mode)
     end)
   end
 
-  defp convertCountToFrequencyDigit({ c0, c1 }, mode) when c0 > c1 do
+  defp convert_count_to_frequency_digit({ c0, c1 }, mode) when c0 > c1 do
     if (mode == :higher), do: 0, else: 1
   end
 
-  defp convertCountToFrequencyDigit({ c0, c1 }, mode) when c0 < c1 do
+  defp convert_count_to_frequency_digit({ c0, c1 }, mode) when c0 < c1 do
     if (mode == :higher), do: 1, else: 0
   end
 
-  defp convertCountToFrequencyDigit({ c0, c1 }, mode) when c0 == c1 do
+  defp convert_count_to_frequency_digit({ c0, c1 }, mode) when c0 == c1 do
     if (mode == :higher), do: 1, else: 0
   end
 
 
   # ========== COUNT HELPERS ==============================
 
-  defp applyDigitsToCounts(digits, counts) do
+  defp apply_digits_to_counts(digits, counts) do
     digits
     |> Enum.with_index
     |> Enum.reduce(counts, fn ({ digit, index }, acc) ->
@@ -94,26 +94,26 @@ defmodule Day03 do
     end)
   end
 
-  defp countOccurrences(list, counts) do
+  defp count_occurrences(list, counts) do
     Enum.reduce(list, counts, fn (digits, acc) ->
-       applyDigitsToCounts(digits, acc)
+       apply_digits_to_counts(digits, acc)
     end)
   end
 
-  defp findItemByCountOccurrences(list, _, _) when length(list) == 1 do
+  defp find_item_by_count_occurrences(list, _, _) when length(list) == 1 do
     List.first(list)
   end
 
-  defp findItemByCountOccurrences(list, index, mode) do
-    freqs  = countOccurrences(list, initialCounts())
-             |> convertCountsToBinaryArray(mode)
+  defp find_item_by_count_occurrences(list, index, mode) do
+    freqs  = count_occurrences(list, initial_counts())
+             |> convert_counts_to_binary_array(mode)
     filter = Enum.at(freqs, index)
 
     filtered_list = Enum.filter(list, fn (item) ->
       Enum.at(item, index) == filter
     end)
 
-    findItemByCountOccurrences(filtered_list, index + 1, mode)
+    find_item_by_count_occurrences(filtered_list, index + 1, mode)
   end
 
 
@@ -130,22 +130,17 @@ defmodule Day03 do
 
   # ========== UTILITY HELPERS ============================
 
-  defp digitsPerLineItem do
+  defp digits_per_line_item do
     List.first(data()) |> length
   end
 
-  defp initialCounts do
-    List.duplicate({ 0, 0 }, digitsPerLineItem())
+  defp initial_counts do
+    List.duplicate({ 0, 0 }, digits_per_line_item())
   end
 
-  defp maxValue do
-    max = :math.pow(2, digitsPerLineItem()) |> trunc
+  defp max_value do
+    max = :math.pow(2, digits_per_line_item()) |> trunc
     max - 1
   end
-
-
-  # ========== DEPRECATED =================================
-
-
 
 end

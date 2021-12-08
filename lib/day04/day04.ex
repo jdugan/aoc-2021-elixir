@@ -22,15 +22,15 @@ defmodule Day04 do
 
   def puzzle1 do
     { boards, numbers }      = data()
-    { winner, final_number } = Game.playToWin(boards, numbers)
+    { winner, final_number } = Game.play_to_win(boards, numbers)
 
     Board.score(winner, final_number)
   end
 
   def puzzle2 do
     { boards, numbers }      = data()
-    { loser, _ }             = Game.playToLose(boards, numbers)
-    { winner, final_number } = Game.playToWin([loser], numbers)
+    { loser, _ }             = Game.play_to_lose(boards, numbers)
+    { winner, final_number } = Game.play_to_win([loser], numbers)
 
     Board.score(winner, final_number)
   end
@@ -44,17 +44,17 @@ defmodule Day04 do
 
   defp data do
     lines          = Reader.to_lines("./data/day04/input.txt")
-    { boards, _ }  = parseBoardLines(Enum.drop(lines, 1))
-    numbers        = parseNumberLine(Enum.at(lines, 0))
+    { boards, _ }  = parse_board_lines(Enum.drop(lines, 1))
+    numbers        = parse_number_line(Enum.at(lines, 0))
 
     { boards, numbers }
   end
 
-  def parseBoardLines(lines) do
+  def parse_board_lines(lines) do
     lines
     |> Enum.with_index
     |> Enum.reduce({ [], [] }, fn { line, index }, { boards, squares } ->
-      line_squares = parseBoardLine(line)
+      line_squares = parse_board_line(line)
       new_squares  = Enum.concat(squares, line_squares)
 
       if rem(index, 5) == 4 do
@@ -65,14 +65,14 @@ defmodule Day04 do
     end)
   end
 
-  def parseBoardLine(line) do
+  def parse_board_line(line) do
     String.split(line, ~r/\s+/, trim: true)
     |> Enum.map(fn s ->
       { String.to_integer(s), false }
     end)
   end
 
-  def parseNumberLine(line) do
+  def parse_number_line(line) do
     String.split(line, ",")
     |> Enum.map(&String.to_integer/1)
   end

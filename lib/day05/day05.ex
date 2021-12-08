@@ -22,12 +22,12 @@ defmodule Day05 do
   def puzzle1 do
     data()
     |> Enum.filter(&Segment.perpendicular?/1)
-    |> countOverlappingPoints
+    |> count_overlapping_points
   end
 
   def puzzle2 do
     data()
-    |> countOverlappingPoints
+    |> count_overlapping_points
   end
 
 
@@ -39,10 +39,10 @@ defmodule Day05 do
 
   defp data do
     Reader.to_lines("./data/day05/input.txt")
-    |> Enum.map(&parseLineIntoSegment/1)
+    |> Enum.map(&parse_line_into_segment/1)
   end
 
-  defp parseLineIntoSegment(line) do
+  defp parse_line_into_segment(line) do
     { x0, y0, x1, y1 } =
       Regex.run(~r/^(\d+),(\d+) -> (\d+),(\d+)$/, line)
       |> Enum.drop(1)
@@ -55,7 +55,7 @@ defmodule Day05 do
 
   # ========== GRID HELPERS ===============================
 
-  defp countOverlappingPoints(segments) do
+  defp count_overlapping_points(segments) do
     points =
       Enum.map(segments, &Segment.points/1)
       |> List.flatten
