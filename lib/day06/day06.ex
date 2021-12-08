@@ -14,14 +14,14 @@ defmodule Day06 do
 
   def puzzle1 do
     data()
-    |> processDays(80)
-    |> countFish
+    |> process_turns(80)
+    |> count_fish
   end
 
   def puzzle2 do
     data()
-    |> processDays(256)
-    |> countFish
+    |> process_turns(256)
+    |> count_fish
   end
 
 
@@ -29,22 +29,22 @@ defmodule Day06 do
   # Private Methods
   # -------------------------------------------------------
 
-  defp countFish(population) do
+  defp count_fish(population) do
     Map.values(population)
     |> Enum.sum
   end
 
-  defp processDays(population, i) when i == 0 do
+  defp process_turns(population, i) when i == 0 do
     population
   end
 
-  defp processDays(current_population, i) do
-    population = processDay(current_population)
+  defp process_turns(current_population, i) do
+    population = process_turn(current_population)
 
-    processDays(population, i - 1)
+    process_turns(population, i - 1)
   end
 
-  defp processDay(population) do
+  defp process_turn(population) do
     Enum.reduce(population, %{}, fn ({ age, count }, acc) ->
       case age do
         0 ->

@@ -11,12 +11,12 @@ defmodule Day04.Game do
   # Public Methods
   # -------------------------------------------------------
 
-  def playToLose(boards, numbers) do
-    processRoundsToLose(boards, numbers, 0, boards)
+  def play_to_lose(boards, numbers) do
+    process_rounds_to_lose(boards, numbers, 0, boards)
   end
 
-  def playToWin(boards, numbers) do
-    processRoundsToWin(boards, numbers, 0, nil)
+  def play_to_win(boards, numbers) do
+    process_rounds_to_win(boards, numbers, 0, nil)
   end
 
 
@@ -24,33 +24,33 @@ defmodule Day04.Game do
   # Private Methods
   # -------------------------------------------------------
 
-  defp processRoundsToLose(_, numbers, index, losers) when length(losers) == 1 do
+  defp process_rounds_to_lose(_, numbers, index, losers) when length(losers) == 1 do
     final_number = Enum.at(numbers, index - 1)
     loser        = Enum.at(losers, 0)
 
     { loser, final_number }
   end
 
-  defp processRoundsToLose(boards, numbers, index, _) do
+  defp process_rounds_to_lose(boards, numbers, index, _) do
     number = Enum.at(numbers, index)
     boards = Enum.map(boards, fn board -> Board.mark(board, number) end)
     losers = Enum.filter(boards, fn board -> !Board.winner?(board) end)
 
-    processRoundsToLose(boards, numbers, index + 1, losers)
+    process_rounds_to_lose(boards, numbers, index + 1, losers)
   end
 
-  defp processRoundsToWin(_, numbers, index, winner) when winner != nil do
+  defp process_rounds_to_win(_, numbers, index, winner) when winner != nil do
     final_number = Enum.at(numbers, index - 1)
 
     { winner, final_number }
   end
 
-  defp processRoundsToWin(boards, numbers, index, _) do
+  defp process_rounds_to_win(boards, numbers, index, _) do
     number = Enum.at(numbers, index)
     boards = Enum.map(boards, fn board -> Board.mark(board, number) end)
     winner = Enum.find(boards, fn board -> Board.winner?(board) end)
 
-    processRoundsToWin(boards, numbers, index + 1, winner)
+    process_rounds_to_win(boards, numbers, index + 1, winner)
   end
 
 end

@@ -14,12 +14,12 @@ defmodule Day07 do
 
   def puzzle1 do
     data()
-    |> findMinimumFuel(:simple)
+    |> find_minimum_fuel(:simple)
   end
 
   def puzzle2 do
     data()
-    |> findMinimumFuel(:complex)
+    |> find_minimum_fuel(:complex)
   end
 
 
@@ -29,20 +29,20 @@ defmodule Day07 do
 
   # ========== FUEL HELPERS ===============================
 
-  defp findMinimumFuel(positions, mode) do
+  defp find_minimum_fuel(positions, mode) do
     keys    = positions |> Map.keys() |> Enum.sort()
     min     = keys |> Enum.at(0)
     max     = keys |> Enum.at(-1)
-    initial = calculateFuelCost(positions, min, mode)
+    initial = calculate_fuel_cost(positions, min, mode)
 
     (min + 1)..max
     |> Enum.reduce(initial, fn (alignment, acc) ->
-      fuel = calculateFuelCost(positions, alignment, mode)
+      fuel = calculate_fuel_cost(positions, alignment, mode)
       if fuel < acc, do: fuel, else: acc
     end)
   end
 
-  defp calculateFuelCost(positions, alignment, :complex) do
+  defp calculate_fuel_cost(positions, alignment, :complex) do
     Enum.reduce(positions, 0, fn ({ p, count }, acc) ->
       n     = abs(p - alignment)
       steps = (n * (n + 1)) / 2 |> trunc
@@ -51,7 +51,7 @@ defmodule Day07 do
     end)
   end
 
-  defp calculateFuelCost(positions, alignment, :simple) do
+  defp calculate_fuel_cost(positions, alignment, :simple) do
     Enum.reduce(positions, 0, fn ({ p, count }, acc) ->
       fuel = abs(p - alignment) * count
       acc + fuel
