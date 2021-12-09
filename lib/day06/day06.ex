@@ -51,9 +51,9 @@ defmodule Day06 do
           Map.put(acc, 6, count)
           |> Map.put(8, count)
         7 ->
-          current = Map.get(acc, age - 1) || 0
+          current = Map.get(acc, 6) || 0
           current = current + count
-          Map.put(acc, age - 1, current)
+          Map.put(acc, 6, current)
         _ ->
           Map.put(acc, age - 1, count)
       end
