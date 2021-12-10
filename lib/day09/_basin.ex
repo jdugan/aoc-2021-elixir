@@ -32,7 +32,7 @@ defmodule Day09.Basin do
 
 
   # -------------------------------------------------------
-  # Public Methods
+  # Private Methods
   # -------------------------------------------------------
 
   defp find_coords(_, found_coords, check_coords) when length(check_coords) == 0 do
@@ -41,7 +41,7 @@ defmodule Day09.Basin do
 
   defp find_coords(sea_floor, found_coords, check_coords) do
     initial_state = { found_coords, MapSet.new() }
-    
+
     { found, check } =
       check_coords
       |> Enum.reduce(initial_state, fn (c_coord, { f_mapset, c_mapset }) ->
