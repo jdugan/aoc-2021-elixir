@@ -50,4 +50,9 @@ defmodule AocTest do
     assert Day10.puzzle1() == 344193
     assert Day10.puzzle2() == 3241238967
   end
+
+  test "Day11" do
+    assert Day11.puzzle1() == 1732
+    assert Day11.puzzle2() == 290
+  end
 end
