@@ -20,11 +20,12 @@ defmodule Day00 do
   end
 
   def puzzle1 do
-    length(data())
+    IO.inspect(data())
+    -1
   end
 
   def puzzle2 do
-    length(data())
+    -2
   end
 
 
@@ -35,7 +36,7 @@ defmodule Day00 do
   # ========== DATA HELPERS ===============================
 
   defp data do
-    Reader.to_lines("./data/day00/input-test.txt")
+    Reader.to_lines("./data/day01/input-test.txt")
   end
 
 end

@@ -58,6 +58,11 @@ defmodule AocTest do
 
   test "Day12" do
     assert Day12.puzzle1() == 4411
-    # assert Day12.puzzle2() == 136767
+    # assert Day12.puzzle2() == 136767        # too slow :(
+  end
+
+  test "Day13" do
+    assert Day13.puzzle1() == 753
+    assert Day13.puzzle2() == "HZLEHJRK"
   end
 end
