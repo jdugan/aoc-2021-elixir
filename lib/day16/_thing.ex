@@ -1,22 +1,20 @@
-defmodule Day12.Cave do
+defmodule Day16.Thing do
 
   # -------------------------------------------------------
   # Configuration
   # -------------------------------------------------------
 
-  defstruct node: nil, connected_nodes: MapSet.new()
+  # defstruct []
 
 
   # -------------------------------------------------------
   # Public Methods
   # -------------------------------------------------------
 
-  # ========== MAP HELPERS ================================
 
-  def add_connected_node(cave, node) do
-    cnodes = MapSet.put(cave.connected_nodes, node)
+  # -------------------------------------------------------
+  # Private Methods
+  # -------------------------------------------------------
 
-    %{ cave | connected_nodes: cnodes }
-  end
 
 end
