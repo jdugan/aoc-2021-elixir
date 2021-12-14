@@ -44,7 +44,6 @@ defmodule Day12 do
       |> parse_caves
 
     %CaveSystem{ caves: caves }
-    |> CaveSystem.set_terminals()
   end
 
   defp parse_caves(mappings) do

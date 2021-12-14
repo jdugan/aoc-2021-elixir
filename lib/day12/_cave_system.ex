@@ -4,43 +4,25 @@ defmodule Day12.CaveSystem do
   # Configuration
   # -------------------------------------------------------
 
-  alias Day12.Cave, as: Cave
+  alias Day12.Path, as: Path
 
-  defstruct caves: %{}, terminals: {}
+  defstruct caves: %{}
 
 
   # -------------------------------------------------------
   # Public Methods
   # -------------------------------------------------------
 
-  # ========== ATTRIBUTES =================================
-
-  def set_terminals(cs) do
-    start_cave = find_start_cave(cs)
-    end_cave   = find_end_cave(cs)
-
-    %{ cs | terminals: { start_cave, end_cave } }
-  end
-
-
   # ========== COUNT HELPERS ==============================
 
-  def count_paths(cs, :anxious) do
-    { start_cave, _ } = cs.terminals
-    complete_paths    = MapSet.new()
-    working_paths     = [[start_cave]]
+  def count_paths(cs, restricted_type) do
+    start_path = %Path{
+      nodes:            ["start"],
+      restricted_nodes: MapSet.new(["start","end"]),
+      restricted_type:  restricted_type
+    }
 
-    explore(cs, cs.terminals, &anxious_reducer/3, complete_paths, working_paths)
-    |> MapSet.size()
-  end
-
-  def count_paths(cs, :bold) do
-    { start_cave, _ } = cs.terminals
-    complete_paths    = MapSet.new()
-    working_paths     = [[start_cave]]
-
-    explore(cs, cs.terminals, &bold_reducer/3, complete_paths, working_paths)
-    |> MapSet.size()
+    explore(cs, [start_path], 0)
   end
 
 
@@ -50,91 +32,39 @@ defmodule Day12.CaveSystem do
 
   # ========== NAVIGATION HELPERS =========================
 
-  defp explore(_, _, _, complete_paths, working_paths) when length(working_paths) == 0  do
-    complete_paths
+  defp explore(_, paths, count) when length(paths) == 0  do
+    count
   end
 
-  defp explore(cs, { start_cave, end_cave }, restricted_reducer, complete_paths, working_paths) do
-    initial_state = { complete_paths, [] }
+  defp explore(cs, paths, count) do
+    initial_state = { [], count }
 
-    { nc_paths, nw_paths } =
-      working_paths
-      |> Enum.reduce(initial_state, fn (path, { c_paths, w_paths }) ->
-        current_cave     = Enum.at(path, 0)
-        restricted_caves = restricted_reducer.(path, start_cave, end_cave)
+    { n_paths, n_count } =
+      paths
+      |> Enum.reduce(initial_state, fn (path, { acc_paths, acc_count }) ->
+        node = Enum.at(path.nodes, 0)
+        cave = find_cave_by_node(cs, node)
 
-        all_steps =
-          current_cave.connected_nodes
-          |> Enum.map(fn n -> find_cave_by_node(cs, n) end)
-        end_step =
-          all_steps
-          |> Enum.find(&Cave.is_end?/1)
-        possible_steps =
-          all_steps
-          |> Enum.reject(fn c ->
-            MapSet.member?(restricted_caves, c)
-          end)
+        { end_nodes, possible_nodes } =
+          Path.classify_nodes(path, cave.connected_nodes)
 
-        rc_paths =
-          if end_step do
-            ep = [ end_step | path ]
-            MapSet.put(c_paths, ep)
-          else
-            c_paths
-          end
-
-        rw_paths =
-          possible_steps
-          |> Enum.reduce(w_paths, fn (c, acc) ->
-            np = [ c | path ]
+        r_paths =
+          possible_nodes
+          |> Enum.reduce(acc_paths, fn (n, acc) ->
+            np  = Path.add_node(path, n)
             [ np | acc ]
           end)
 
-        { rc_paths, rw_paths}
+        r_count = acc_count + length(end_nodes)
+
+        { r_paths, r_count }
       end)
 
-    explore(cs, { start_cave, end_cave }, restricted_reducer, nc_paths, nw_paths)
+    explore(cs, n_paths, n_count)
   end
 
   defp find_cave_by_node(cs, node) do
     Map.fetch!(cs.caves, node)
-  end
-
-  defp find_end_cave(cs) do
-    find_cave_by_node(cs, "end")
-  end
-
-  defp find_start_cave(cs) do
-    find_cave_by_node(cs, "start")
-  end
-
-
-  # ========== VISITED HELPERS ============================
-
-  defp anxious_reducer(path, _, end_cave) do
-    [ end_cave | path ]
-    |> Enum.reject(&Cave.is_large?/1)
-    |> MapSet.new()
-  end
-
-  defp bold_reducer(path, start_cave, end_cave) do
-    anxious =
-      [ end_cave | path ]
-      |> Enum.reject(&Cave.is_large?/1)
-
-    max =
-      anxious
-      |> Enum.frequencies()
-      |> Map.values()
-      |> Enum.max()
-
-    if max > 1 do
-      anxious
-      |> MapSet.new()
-    else
-      [ start_cave, end_cave ]
-      |> MapSet.new()
-    end
   end
 
 end
