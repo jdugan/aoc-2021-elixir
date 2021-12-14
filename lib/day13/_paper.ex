@@ -4,6 +4,8 @@ defmodule Day13.Paper do
   # Configuration
   # -------------------------------------------------------
 
+  alias __MODULE__
+
   defstruct [:dots, :folds]
 
 
@@ -21,7 +23,7 @@ defmodule Day13.Paper do
   # ========== FOLD HELPERS ===============================
 
   def fold_all(paper) do
-    initial = %Day13.Paper{ dots: paper.dots }
+    initial = %Paper{ dots: paper.dots }
 
     paper.folds
     |> Enum.reduce(initial, fn ({ dir, crease }, p) ->
@@ -62,7 +64,7 @@ defmodule Day13.Paper do
         Map.put(map, fold_coord(coord, dir, crease), "#")
       end)
 
-    %Day13.Paper{ dots: dots, folds: paper.folds }
+    %Paper{ dots: dots, folds: paper.folds }
   end
 
   defp fold_coord({ x, y }, :x, crease) do
