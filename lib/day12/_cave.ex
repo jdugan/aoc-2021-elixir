@@ -39,14 +39,4 @@ defmodule Day12.Cave do
     cave.node == "start"
   end
 
-  def is_terminus?(cave) do
-    is_start?(cave) or is_end?(cave)
-  end
-
-
-  # -------------------------------------------------------
-  # Private Methods
-  # -------------------------------------------------------
-
-
 end
