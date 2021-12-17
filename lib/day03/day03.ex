@@ -33,34 +33,22 @@ defmodule Day03 do
   defp find_gamma_rate() do
     count_occurrences(data(), initial_counts())
     |> convert_counts_to_binary_array(:higher)
-    |> convert_binary_array_to_decimal
+    |> Conversion.binary_array_to_decimal
   end
 
   # life support
   defp find_carbon_rate() do
     find_item_by_count_occurrences(data(), 0, :lower)
-    |> convert_binary_array_to_decimal
+    |> Conversion.binary_array_to_decimal
   end
 
   defp find_oxygen_rate() do
     find_item_by_count_occurrences(data(), 0, :higher)
-    |> convert_binary_array_to_decimal
+    |> Conversion.binary_array_to_decimal
   end
 
 
   # ========== CONVERSION HELPERS =========================
-
-  defp convert_binary_array_to_decimal(digits) do
-    Enum.reverse(digits)
-    |> Enum.with_index
-    |> Enum.reduce(0, fn({n, i}, acc) ->
-      if n == 1 do
-        acc + (:math.pow(2, i)) |> trunc
-      else
-        acc
-      end
-    end)
-  end
 
   defp convert_counts_to_binary_array(counts, mode) do
     Enum.map(counts, fn(count) ->
