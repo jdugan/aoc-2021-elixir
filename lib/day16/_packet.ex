@@ -30,7 +30,6 @@ defmodule Day16.Packet do
   # ========== COUNT HELPERS ==============================
 
   def evaluate(packet) do
-    IO.inspect packet
     packet.value
   end
 
