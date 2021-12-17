@@ -4,7 +4,7 @@ defmodule Day16 do
   # Configuration
   # -------------------------------------------------------
 
-  # alias Day16.Thing, as: Thing
+  alias Day16.Packet, as: Packet
 
 
   # -------------------------------------------------------
@@ -20,12 +20,17 @@ defmodule Day16 do
   end
 
   def puzzle1 do
-    # IO.inspect(data())
-    -1
+    data()
+    |> Conversion.hex_string_to_binary_string()
+    |> Packet.decode()
+    |> Packet.sum_versions()
   end
 
   def puzzle2 do
-    -2
+    data()
+    |> Conversion.hex_string_to_binary_string()
+    |> Packet.decode()
+    |> Packet.evaluate()
   end
 
 
@@ -36,7 +41,8 @@ defmodule Day16 do
   # ========== DATA HELPERS ===============================
 
   defp data do
-    Reader.to_lines("./data/day16/input-test.txt")
+    Reader.to_lines("./data/day16/input.txt")
+    |> Enum.at(0)
   end
 
 end
