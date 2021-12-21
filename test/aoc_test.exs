@@ -73,7 +73,7 @@ defmodule AocTest do
 
   test "Day15" do
     assert Day15.puzzle1() == 720
-    # assert Day15.puzzle2() == 3025    # Clock => ~39s :(
+    # assert Day15.puzzle2() == 3025    # Clock => ~39s
   end
 
   test "Day16" do
@@ -99,6 +99,11 @@ defmodule AocTest do
   test "Day20" do
     assert Day20.puzzle1() == 5765
     assert Day20.puzzle2() == 18509
+  end
+
+  test "Day21" do
+    assert Day21.puzzle1() == 920079
+    # assert Day21.puzzle2() == 56852759190649    # Clock => ~30s
   end
 
 end
