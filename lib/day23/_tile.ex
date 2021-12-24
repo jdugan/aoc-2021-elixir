@@ -1,31 +1,22 @@
-defmodule Day23 do
+defmodule Day23.Tile do
 
   # -------------------------------------------------------
   # Configuration
   # -------------------------------------------------------
 
-  # alias Day00.Thing, as: Thing
+  defstruct [
+    id:           nil,
+    occupant_id:  nil,
+    type:         :hall,
+  ]
 
 
   # -------------------------------------------------------
   # Public Methods
   # -------------------------------------------------------
 
-  def both do
-    IO.puts(" ")
-    IO.puts("DAY 23")
-    IO.puts("  Puzzle 1 => #{ puzzle1() }")
-    IO.puts("  Puzzle 2 => #{ puzzle2() }")
-    IO.puts(" ")
-  end
-
-  def puzzle1 do
-    IO.inspect(data())
-    -1
-  end
-
-  def puzzle2 do
-    -2
+  def energy_consumed(amphipod) do
+    amphipod.steps * amphipod.cost
   end
 
 
@@ -33,10 +24,5 @@ defmodule Day23 do
   # Private Methods
   # -------------------------------------------------------
 
-  # ========== DATA HELPERS ===============================
-
-  defp data do
-    Reader.to_lines("./data/day23/input-test.txt")
-  end
 
 end

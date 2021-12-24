@@ -1,0 +1,3 @@
+inp w
+inp y
+mod w y
