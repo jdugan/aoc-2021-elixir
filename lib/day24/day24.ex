@@ -22,9 +22,7 @@ defmodule Day24 do
 
   def puzzle1 do
     data()
-    |> Computer.test([11,-3])
-
-    -1
+    |> Computer.largest_model_number()
   end
 
   def puzzle2 do
@@ -40,7 +38,7 @@ defmodule Day24 do
 
   defp data do
     program =
-      Reader.to_lines("./data/day24/input-test.txt")
+      Reader.to_lines("./data/day24/input.txt")
       |> Enum.map(&Instruction.parse/1)
 
     %Computer{ program: program }
