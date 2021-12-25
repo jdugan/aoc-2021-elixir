@@ -21,8 +21,12 @@ defmodule Day24 do
   end
 
   def puzzle1 do
-    data()
-    |> Computer.largest_model_number()
+    unless Mix.env() == :test do
+      data()
+      |> Computer.debug([1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+      |> Computer.print()
+    end
+    -1
   end
 
   def puzzle2 do

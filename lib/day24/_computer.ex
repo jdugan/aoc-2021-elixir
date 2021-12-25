@@ -17,6 +17,11 @@ defmodule Day24.Computer do
   # Public Methods
   # -------------------------------------------------------
 
+  def debug(computer, input) do
+    run(computer, computer.program, input, true)
+  end
+
+
   # ========== MONAD HELPERS ==============================
 
   def largest_model_number(computer) do

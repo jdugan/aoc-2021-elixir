@@ -121,4 +121,9 @@ defmodule AocTest do
     assert Day24.puzzle2() == -2
   end
 
+  test "Day25" do
+    assert Day25.puzzle1() == 378
+    # freebie!
+  end
+
 end
