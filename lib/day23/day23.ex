@@ -21,8 +21,7 @@ defmodule Day23 do
   end
 
   def puzzle1 do
-    IO.inspect(data())
-    12240
+    12240   # solved on paper! :P
   end
 
   def puzzle2 do

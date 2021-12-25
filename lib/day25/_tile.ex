@@ -1,16 +1,25 @@
-defmodule Day00.Thing do
+defmodule Day25.Tile do
 
   # -------------------------------------------------------
   # Configuration
   # -------------------------------------------------------
 
-  # defstruct []
+  defstruct [
+    id:       {},
+    east_id:  {},
+    south_id: {}
+  ]
 
 
   # -------------------------------------------------------
   # Public Methods
   # -------------------------------------------------------
 
+  # ========== MOVE HELPERS ===============================
+
+  def open?(tile, critters) do
+    !Map.has_key?(critters, tile.id)
+  end
 
   # -------------------------------------------------------
   # Private Methods
