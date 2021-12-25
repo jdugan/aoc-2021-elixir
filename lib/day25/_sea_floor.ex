@@ -4,7 +4,6 @@ defmodule Day25.SeaFloor do
   # Configuration
   # -------------------------------------------------------
 
-  alias __MODULE__
   alias Day25.Critter, as: Critter
   alias Day25.Tile,    as: Tile
 
