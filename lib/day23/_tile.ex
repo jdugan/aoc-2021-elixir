@@ -5,9 +5,8 @@ defmodule Day23.Tile do
   # -------------------------------------------------------
 
   defstruct [
-    id:           nil,
-    occupant_id:  nil,
-    type:         :hall,
+    id:   nil,
+    type: :hall,
   ]
 
 
@@ -15,8 +14,22 @@ defmodule Day23.Tile do
   # Public Methods
   # -------------------------------------------------------
 
-  def energy_consumed(amphipod) do
-    amphipod.steps * amphipod.cost
+  # ========== STATE HELPERS ==============================
+
+  def is_door?(tile) do
+    tile.type == :door
+  end
+
+  def is_hall?(tile) do
+    tile.type == :hall
+  end
+
+  def is_room?(tile) do
+    tile.type == :room
+  end
+
+  def occupied?(tile, burrow) do
+    Map.has_key?(burrow.critters, tile.id)
   end
 
 
