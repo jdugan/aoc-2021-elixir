@@ -21,16 +21,15 @@ defmodule Day24 do
   end
 
   def puzzle1 do
-    unless Mix.env() == :test do
-      data()
-      |> Computer.debug([1,1,1,1,1,1,1,1,1,1,1,1,1,1])
-      |> Computer.print()
-    end
-    -1
+    # 92969593497992 <- found using Computer.debug()
+    data()
+    |> Computer.closest_model_number(92969593497999)
   end
 
   def puzzle2 do
-    -2
+    # 81514171161381 <- found using Computer.debug()
+    data()
+    |> Computer.closest_model_number(81514171161999)
   end
 
 

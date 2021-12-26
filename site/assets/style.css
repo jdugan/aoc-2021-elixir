@@ -304,6 +304,10 @@ article li:before {
   left: 0;
   top: 0;
 }
+/* easter eggs */
+article *[title] {
+  border-bottom:1px dotted #ffff66;
+}
 .day-success {
   color: #ffff66;
   text-shadow: 0 0 5px #ffff66;

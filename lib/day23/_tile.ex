@@ -32,10 +32,4 @@ defmodule Day23.Tile do
     Map.has_key?(burrow.critters, tile.id)
   end
 
-
-  # -------------------------------------------------------
-  # Private Methods
-  # -------------------------------------------------------
-
-
 end
