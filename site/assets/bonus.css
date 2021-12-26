@@ -1,0 +1,88 @@
+.calendar-bkg {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 100%);
+}
+
+.sf {
+  position: fixed;
+  animation: anim-sf0 linear 20s infinite;
+  z-index: -1;
+}
+
+.sf:before {
+  content: "*";
+}
+
+.sf.sf0 {
+  color: #ffffff;
+}
+
+.sf.sf1 {
+  color: #cccccc;
+  animation-name: anim-sf1;
+}
+
+.sf.sf2 {
+  color: #999999;
+  animation-name: anim-sf2;
+}
+
+.sf.sf3 {
+  color: #666666;
+  animation-name: anim-sf3;
+}
+
+@keyframes anim-sf0 {
+  0% {
+    transform: translate(0, 0) rotate(0) scale(1.0, 1.0);
+  }
+
+  95% {
+    transform: translate(8em, 100vh) rotate(1turn) scale(1.0, 1.0);
+  }
+
+  100% {
+    transform: translate(8em, 100vh) rotate(1turn) scale(0.0, 0.0);
+  }
+}
+
+@keyframes anim-sf1 {
+  0% {
+    transform: translate(0, 0) rotate(0) scale(1.0, 1.0);
+  }
+
+  95% {
+    transform: translate(6em, 100vh) rotate(1turn) scale(1.0, 1.0);
+  }
+
+  100% {
+    transform: translate(6em, 100vh) rotate(1turn) scale(0.0, 0.0);
+  }
+}
+
+@keyframes anim-sf2 {
+  0% {
+    transform: translate(0, 0) rotate(0) scale(1.0, 1.0);
+  }
+
+  95% {
+    transform: translate(4em, 100vh) rotate(1turn) scale(1.0, 1.0);
+  }
+
+  100% {
+    transform: translate(4em, 100vh) rotate(1turn) scale(0.0, 0.0);
+  }
+}
+
+@keyframes anim-sf3 {
+  0% {
+    transform: translate(0, 0) rotate(0) scale(1.0, 1.0);
+  }
+
+  95% {
+    transform: translate(2em, 100vh) rotate(1turn) scale(1.0, 1.0);
+  }
+
+  100% {
+    transform: translate(2em, 100vh) rotate(1turn) scale(0.0, 0.0);
+  }
+}

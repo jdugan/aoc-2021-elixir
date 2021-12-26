@@ -1,27 +1,39 @@
-.calendar .calendar-color-w14 { color:#003374; }
-.calendar .calendar-color-w1 { color:#00c8ff; }
-.calendar .calendar-color-w4 { color:#0091cc; }
-.calendar .calendar-color-w16 { color:#00296b; }
-.calendar .calendar-color-r { color:#ff0000; }
-.calendar .calendar-color-w15 { color:#002e6f; }
-.calendar .calendar-color-w17 { color:#002566; }
-.calendar .calendar-color-w12 { color:#004282; }
-.calendar .calendar-color-w22 { color:#000d51; }
-.calendar .calendar-color-w3 { color:#00a2db; }
-.calendar .calendar-color-w7 { color:#006daa; }
-.calendar .calendar-color-w13 { color:#003b7b; }
-.calendar .calendar-color-w10 { color:#005291; }
-.calendar .calendar-color-w2 { color:#00b5ed; }
-.calendar .calendar-color-w11 { color:#004a8a; }
-.calendar .calendar-color-w9 { color:#005a98; }
-.calendar .calendar-color-w8 { color:#00619f; }
-.calendar .calendar-color-w19 { color:#001b5e; }
-.calendar .calendar-color-w18 { color:#002062; }
-.calendar .calendar-color-w20 { color:#001759; }
-.calendar .calendar-color-g { color:#a47a4d; }
-.calendar .calendar-color-w21 { color:#001255; }
-.calendar .calendar-color-o { color:#c74c30; }
+.calendar .calendar-color-c1 { display: inline-block; animation: anim-crab 5s ease-in-out infinite; color:#ff0000; text-shadow:0 0 5px #ff0000, 0 0 5px #ff0000, 0 0 5px #ff0000, 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 10px #ff0000, 0 0 10px #ff0000; }
+.calendar .calendar-color-c2 { display: inline-block; animation: anim-crab 5s ease-in-out infinite; color:#ff9900; text-shadow:0 0 5px #ff9900, 0 0 5px #ff9900, 0 0 5px #ff9900, 0 0 5px #ff9900, 0 0 10px #ff9900, 0 0 10px #ff9900, 0 0 10px #ff9900; }
+.calendar .calendar-color-c3 { display: inline-block; animation: anim-crab 5s ease-in-out infinite; color:#009933; text-shadow:0 0 5px #009933, 0 0 5px #009933, 0 0 5px #009933, 0 0 5px #009933, 0 0 10px #009933, 0 0 10px #009933, 0 0 10px #009933; }
+.calendar .calendar-color-c4 { display: inline-block; animation: anim-crab 5s ease-in-out infinite; color:#0066ff; text-shadow:0 0 5px #0066ff, 0 0 5px #0066ff, 0 0 5px #0066ff, 0 0 5px #0066ff, 0 0 10px #0066ff, 0 0 10px #0066ff, 0 0 10px #0066ff; }
+.calendar .calendar-color-c5 { display: inline-block; animation: anim-crab 5s ease-in-out infinite; color:#ff00ff; text-shadow:0 0 5px #ff00ff, 0 0 5px #ff00ff, 0 0 5px #ff00ff, 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 10px #ff00ff, 0 0 10px #ff00ff; }
 .calendar .calendar-color-d { color:#584338; }
-.calendar .calendar-color-w5 { color:#0085c0; }
+.calendar .calendar-color-g { color:#a47a4d; }
+.calendar .calendar-color-o { color:#c74c30; }
+.calendar .calendar-color-r { color:#ff0000; }
 .calendar .calendar-color-s { color:#ffffff; }
+.calendar .calendar-color-w1 { color:#00c8ff; }
+.calendar .calendar-color-w2 { color:#00b5ed; }
+.calendar .calendar-color-w3 { color:#00a2db; }
+.calendar .calendar-color-w4 { color:#0091cc; }
+.calendar .calendar-color-w5 { color:#0085c0; }
 .calendar .calendar-color-w6 { color:#0079b5; }
+.calendar .calendar-color-w7 { color:#006daa; }
+.calendar .calendar-color-w8 { color:#00619f; }
+.calendar .calendar-color-w9 { color:#005a98; }
+.calendar .calendar-color-w10 { color:#005291; }
+.calendar .calendar-color-w11 { color:#004a8a; }
+.calendar .calendar-color-w12 { color:#004282; }
+.calendar .calendar-color-w13 { color:#003b7b; }
+.calendar .calendar-color-w14 { color:#003374; }
+.calendar .calendar-color-w15 { color:#002e6f; }
+.calendar .calendar-color-w16 { color:#00296b; }
+.calendar .calendar-color-w17 { color:#002566; }
+.calendar .calendar-color-w18 { color:#002062; }
+.calendar .calendar-color-w19 { color:#001b5e; }
+.calendar .calendar-color-w20 { color:#001759; }
+.calendar .calendar-color-w21 { color:#001255; }
+.calendar .calendar-color-w22 { color:#000d51; }
+.calendar .calendar-color-w23 { color:#00094c; }
+
+@keyframes anim-crab {
+    0% { transform: translate(-.2em,0); }
+   50% { transform: translate( .2em,0); }
+  100% { transform: translate(-.2em,0); }
+}
