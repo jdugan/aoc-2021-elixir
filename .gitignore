@@ -24,3 +24,7 @@ aoc-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# aoc stuff
+/data/**/input.txt
+/data/**/input-extended.txt

@@ -20,7 +20,7 @@ The examples are representative of my thinking and coding style.
 
 ### Prerequisites
 
-The project requires `elixir 1.12.3`, but any reasonably current version of
+The project requires `elixir 1.17.1-otp-27`, but any reasonably current version of
 Elixir will likely work.  I tend to code done the middle of any language
 specification.
 

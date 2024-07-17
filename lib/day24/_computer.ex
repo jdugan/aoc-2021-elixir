@@ -51,7 +51,7 @@ defmodule Day24.Computer do
         if debug_mode do
           print(current_computer)
         end
-        
+
         [ b | input ] = remaining_input
         memory        = Memory.put(memory, raw_a, b)
         computer      = %{ current_computer | memory: memory }
@@ -165,7 +165,7 @@ defmodule Day24.Computer do
       mod_divisor = :math.pow(10, power) |> trunc()
       mod_diff    = rem(current_number, mod_divisor)
       next_number = current_number - mod_diff - 1
-      IO.puts "skipping => #{ current_number } for #{ next_number }"
+      # IO.puts "skipping => #{ current_number } for #{ next_number }"
 
       find_valid_model_number(computer, next_number, valid_number)
     else

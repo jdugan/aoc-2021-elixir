@@ -81,7 +81,7 @@ defmodule Day16.Packet do
 
     remainder =
       body
-      |> String.slice(length(binary_partials)*5..-1)
+      |> String.slice(length(binary_partials)*5..-1//1)
       |> scrub_remainder()
 
     { value, [], remainder }
@@ -96,7 +96,7 @@ defmodule Day16.Packet do
       sp_len    = Conversion.binary_string_to_decimal(sp_len0)
       b_str     = String.slice(str0, 0, sp_len)
       { sp, _ } = parse(b_str, [])
-      remainder = String.slice(str0, sp_len..-1) |> scrub_remainder()
+      remainder = String.slice(str0, sp_len..-1//1) |> scrub_remainder()
 
       { nil, Enum.reverse(sp), remainder }
     else

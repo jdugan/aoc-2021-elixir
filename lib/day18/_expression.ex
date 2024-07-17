@@ -50,11 +50,11 @@ defmodule Day18.Expression do
     str0 =
       str
       |> String.slice(0, comma_index)
-      |> String.slice(1..-1)
+      |> String.slice(1..-1//1)
     str1 =
       str
-      |> String.slice(comma_index+1..-1)
-      |> String.slice(0..-2)
+      |> String.slice(comma_index+1..-1//1)
+      |> String.slice(0..-2//1)
 
     pair =
       [str0, str1]
@@ -80,7 +80,7 @@ defmodule Day18.Expression do
     graphemes =
       str
       |> String.graphemes()
-      |> Enum.slice(1..-2)
+      |> Enum.slice(1..-2//1)
 
     subindex =
       if Enum.at(graphemes, 0) == "[" do
@@ -138,7 +138,7 @@ defmodule Day18.Expression do
 
     { p1, p2 } =
       exploding_str
-      |> String.slice(1..-2)
+      |> String.slice(1..-2//1)
       |> String.split(",")
       |> Enum.map(&String.to_integer/1)
       |> List.to_tuple()
@@ -155,7 +155,7 @@ defmodule Day18.Expression do
 
     after_str =
       base_str
-      |> String.slice(explode_i+explode_len..-1)
+      |> String.slice(explode_i+explode_len..-1//1)
       |> String.replace(~r/\d+/, fn match ->
         imatch = String.to_integer(match)
         "#{ imatch + p2 }"
